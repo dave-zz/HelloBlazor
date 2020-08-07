@@ -1,0 +1,23 @@
+﻿@page "/testing"
+@using HelloBlazor.Common.Model
+
+<h1>Testing blazor components</h1>
+
+<button id="toggle" class="btn btn-primary" @onclick="ToggleHiddenText">Click me!</button>
+<br />
+@if (visible)
+{
+    <p id="hidden_text">You clicked this @clicked times!</p>
+}
+
+
+@code {
+    bool visible = false;
+    public int clicked { get; set; } = 0;
+
+    void ToggleHiddenText()
+    {
+        visible = !visible;
+        clicked++;
+    }
+}
