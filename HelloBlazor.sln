@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloBlazor.App", "HelloBla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloBlazor.Identity", "HelloBlazor.Identity\HelloBlazor.Identity.csproj", "{349CFB1A-63AE-4C5E-80D2-96A768254515}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloBlazor.App.Tests", "HelloBlazor.App.Tests\HelloBlazor.App.Tests.csproj", "{C27DD7FC-8B60-4A48-BFD7-7259A18A3415}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloBlazor.App.Tests", "HelloBlazor.App.Tests\HelloBlazor.App.Tests.csproj", "{C27DD7FC-8B60-4A48-BFD7-7259A18A3415}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D2B84453-9EE8-4736-8D5E-78697429650B}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,26 @@
+﻿@page "/pwa"
+@attribute [Authorize]
+@inject IJSRuntime JSRuntime
+@inject INotificationService NotificationService
+
+<h3>_5PWA</h3>
+
+@code {
+    protected override void OnInitialized()
+    {
+        // In the background, ask if they want to be notified about order updates
+        _ = RequestNotificationSubscriptionAsync();
+    }
+
+    async Task RequestNotificationSubscriptionAsync()
+    {
+        var subscription = await JSRuntime.InvokeAsync<NotificationSubscription>("blazorPushNotifications.requestSubscription");
+        if (subscription != null)
+        {
+            subscription.UserId = ClaimsPrincipal.Current
+                .Claims.FirstOrDefault(c => c.Type == "email").Value;
+            Console.WriteLine($"Subscribing {subscription.UserId}...");
+            await NotificationService.SubscribeToNotifications(subscription);
+        }
+    }
+}

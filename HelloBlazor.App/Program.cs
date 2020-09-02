@@ -3,8 +3,9 @@ using System.Globalization;
 using System.Threading.Tasks;
 
 using HelloBlazor.Common.Services;
-
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
 
@@ -20,7 +21,7 @@ namespace HelloBlazor.App
             #region OAuth + OIDC
             builder.Services.AddOidcAuthentication(options =>
             {
-                //builder.Configuration.Bind("Identity", options.ProviderOptions);
+                builder.Configuration.Bind("Identity", options.ProviderOptions);
             });
             #endregion
 
@@ -53,6 +54,21 @@ namespace HelloBlazor.App
             //}
 
             //await host.RunAsync();
+            #endregion
+
+            #region A failed experiment
+            builder.Services.AddHttpClient<INotificationService, NotificationService>(client =>
+                {
+                    client.BaseAddress = new Uri("https://localhost:5001/");
+                    client.DefaultRequestHeaders.Add("Accept", "application/json");
+                }).AddHttpMessageHandler(sp =>
+                  {
+                      var handler = sp.GetService<AuthorizationMessageHandler>()
+                          .ConfigureHandler(
+                              authorizedUrls: new[] { "https://localhost:5001" },
+                              scopes: new[] { "HelloBlazor.Server.Read" });
+                      return handler;
+                  }); 
             #endregion
 
             await builder.Build().RunAsync();
