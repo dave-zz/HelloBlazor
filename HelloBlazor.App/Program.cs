@@ -41,18 +41,18 @@ namespace HelloBlazor.App
             #endregion
 
             #region Localization
-            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-            var host = builder.Build();
-            var jsInterop = host.Services.GetRequiredService<IJSRuntime>();
-            var result = await jsInterop.InvokeAsync<string>("blazorCulture.get");
-            if (result != null)
-            {
-                var culture = new CultureInfo(result);
-                CultureInfo.DefaultThreadCurrentCulture = culture;
-                CultureInfo.DefaultThreadCurrentUICulture = culture;
-            }
+            //builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+            //var host = builder.Build();
+            //var jsInterop = host.Services.GetRequiredService<IJSRuntime>();
+            //var result = await jsInterop.InvokeAsync<string>("blazorCulture.get");
+            //if (result != null)
+            //{
+            //    var culture = new CultureInfo(result);
+            //    CultureInfo.DefaultThreadCurrentCulture = culture;
+            //    CultureInfo.DefaultThreadCurrentUICulture = culture;
+            //}
 
-            await host.RunAsync();
+            //await host.RunAsync();
             #endregion
 
             await builder.Build().RunAsync();
