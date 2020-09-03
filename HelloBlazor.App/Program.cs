@@ -21,7 +21,7 @@ namespace HelloBlazor.App
             #region OAuth + OIDC
             builder.Services.AddOidcAuthentication(options =>
             {
-                builder.Configuration.Bind("Identity", options.ProviderOptions);
+                //builder.Configuration.Bind("Identity", options.ProviderOptions);
             });
             #endregion
 
@@ -30,30 +30,33 @@ namespace HelloBlazor.App
             {
                 client.BaseAddress = new Uri("https://localhost:5001/");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
-            }); // ASP.NET Core middleware <3  <3  <3
-                //    .AddHttpMessageHandler(sp =>
-                //{
-                //    var handler = sp.GetService<AuthorizationMessageHandler>()
-                //        .ConfigureHandler(
-                //            authorizedUrls: new[] { "https://localhost:5001" },
-                //            scopes: new[] { "HelloBlazor.Server.Read" });
-                //    return handler;
-                //});
+            });
+            //.AddHttpMessageHandler(sp =>
+            //{
+            //    var handler = sp.GetService<AuthorizationMessageHandler>()
+            //        .ConfigureHandler(
+            //            authorizedUrls: new[] { "https://localhost:5001" },
+            //            scopes: new[] { "HelloBlazor.Server.Read" });
+            //    return handler;
+            //});
             #endregion
 
             #region Localization
             //builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-            //var host = builder.Build();
-            //var jsInterop = host.Services.GetRequiredService<IJSRuntime>();
-            //var result = await jsInterop.InvokeAsync<string>("blazorCulture.get");
-            //if (result != null)
-            //{
-            //    var culture = new CultureInfo(result);
-            //    CultureInfo.DefaultThreadCurrentCulture = culture;
-            //    CultureInfo.DefaultThreadCurrentUICulture = culture;
-            //}
+            #endregion
 
-            //await host.RunAsync();
+            #region Javascript storage helper
+            var host = builder.Build();
+            var jsInterop = host.Services.GetRequiredService<IJSRuntime>();
+            var result = await jsInterop.InvokeAsync<string>("blazorCulture.get");
+            if (result != null)
+            {
+                var culture = new CultureInfo(result);
+                CultureInfo.DefaultThreadCurrentCulture = culture;
+                CultureInfo.DefaultThreadCurrentUICulture = culture;
+            }
+
+            await host.RunAsync();
             #endregion
 
             #region A failed experiment

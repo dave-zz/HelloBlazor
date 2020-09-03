@@ -21,6 +21,7 @@ namespace HelloBlazor.App.Tests
         public void ShouldContainTitle()
         {
             var component = _context.RenderComponent<_7Testing>();
+            // CSS selector
             component.Find("h1").TextContent
                 .Should().BeEquivalentTo("Testing blazor components");
         }
@@ -29,13 +30,16 @@ namespace HelloBlazor.App.Tests
         public void ShouldHandleClick()
         {
             var component = _context.RenderComponent<_7Testing>();
+            // Id selector
             component.Nodes.GetElementById("hidden_text")
-                .Should().BeNull();
+                .Should().BeSameAs(null);
 
             var button = component.Nodes.GetElementById("toggle");
+            // Handling actions
             button.Click();
-            component.Nodes.GetElementById("hidden_text")
-                .Should().NotBeNull();
+            var hiddenText = component.Nodes.GetElementById("hidden_text");
+            hiddenText.Should().NotBeNull();
+            hiddenText.TextContent.Should().Be("You clicked this 1 times!");
         }
 
         [Fact]
@@ -48,6 +52,7 @@ namespace HelloBlazor.App.Tests
             for (var i = 1; i <= 10; i++) {
                 button.Click();
             }
+            // Checking property's value
             component.Instance.clicked.Should().Be(10);
         }
     }

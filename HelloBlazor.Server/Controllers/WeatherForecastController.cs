@@ -5,6 +5,7 @@ using System.Text.Json;
 
 using HelloBlazor.Common.Model;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HelloBlazor.Server.Controllers

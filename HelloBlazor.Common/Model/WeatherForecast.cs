@@ -15,7 +15,8 @@ namespace HelloBlazor.Common.Model
         public int TemperatureC { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Summary is too long")]
+        [StringLength(100, ErrorMessage = "Summary is too long")] 
+        // If you use EF, this will also affect the DbContext 
         public string Summary { get; set; } = string.Empty;
 
         #region ToString & default summary values
